@@ -34,7 +34,7 @@ const Canva = () => {
               ? item.y + 50
               : position === "bottom"
               ? item.y + 100 - 2
-              : item.y + 50
+              : item.y + 50,
         },
         featureBPosition: {
           x:
@@ -52,10 +52,10 @@ const Canva = () => {
               ? item.y + 50 + 3
               : position === "bottom"
               ? item.y + 100 + 100
-              : item.y + 50 + 3
+              : item.y + 50 + 3,
         },
-        Selected: false
-      }
+        Selected: false,
+      },
     ]);
   };
 
@@ -81,7 +81,7 @@ const Canva = () => {
       const { offsetX, offsetY, type } = JSON.parse(draggedData);
       stageRef.current = {
         x: event.nativeEvent.offsetX,
-        y: event.nativeEvent.offsetY
+        y: event.nativeEvent.offsetY,
       };
 
       if (type === SHAPE_TYPES.RECT) {
@@ -96,8 +96,8 @@ const Canva = () => {
             STRING: "",
             Height: 100,
             width: 150,
-            InputHeight: 88
-          }
+            InputHeight: 88,
+          },
         ]);
       } else if (type === SHAPE_TYPES.CIRCLE) {
         setArr([
@@ -111,8 +111,8 @@ const Canva = () => {
             STRING: "",
             Height: 100,
             width: 150,
-            InputHeight: 88
-          }
+            InputHeight: 88,
+          },
         ]);
       }
     }
@@ -148,8 +148,8 @@ const Canva = () => {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        data: []
-      })
+        data: [],
+      }),
     });
   };
 
@@ -159,8 +159,8 @@ const Canva = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         data: arr,
-        arrows: arrow.arrows
-      })
+        arrows: arrow.arrows,
+      }),
     });
   };
 
@@ -187,7 +187,7 @@ const Canva = () => {
       if (key === "Delete") {
         setArr(a.current.filter((item) => item.Selected !== true));
         arrow.setArrows([
-          ...bArrow.current.filter((item) => item.Selected !== true)
+          ...bArrow.current.filter((item) => item.Selected !== true),
         ]);
       }
     };
@@ -207,7 +207,7 @@ const Canva = () => {
 
   const [initial, setInitial] = useState({
     active: false,
-    offset: { x: 0, y: 0 }
+    offset: { x: 0, y: 0 },
   });
   const pointerDown = (e) => {
     const el = e.target;
@@ -218,7 +218,7 @@ const Canva = () => {
     setInitial({
       ...initial,
       active: true,
-      offset: { x: x, y: y }
+      offset: { x: x, y: y },
     });
   };
   const pointerMove = (e, item) => {
@@ -230,30 +230,30 @@ const Canva = () => {
       item.y = item.y + y - initial.offset.y;
       item.Height = item.Height - (y - initial.offset.y);
       setInitial({
-        ...initial
+        ...initial,
       });
     } else if (initial.active && shape === "right") {
       item.width = item.width + (x - initial.offset.x);
       setInitial({
-        ...initial
+        ...initial,
       });
     } else if (initial.active && shape === "bottom") {
       item.Height = item.Height + (y - initial.offset.y);
       setInitial({
-        ...initial
+        ...initial,
       });
     } else if (initial.active && shape === "left") {
       item.x = item.x + (x - initial.offset.x);
       item.width = item.width - (x - initial.offset.x);
       setInitial({
-        ...initial
+        ...initial,
       });
     }
   };
   const pointerUp = (event) => {
     setInitial({
       ...initial,
-      active: false
+      active: false,
     });
   };
 
@@ -278,7 +278,7 @@ const Canva = () => {
                 top: `${item.y}px`,
                 position: "absolute",
                 height: `${item.Height + 10}px`,
-                width: `${item.Width + 10}px`
+                width: `${item.Width + 10}px`,
               }}
             >
               <div>
@@ -301,7 +301,7 @@ const Canva = () => {
                         right: "0",
                         height: "5px",
                         cursor: "n-resize",
-                        backgroundColor: "black"
+                        backgroundColor: "black",
                       }}
                       data-shape={"top"}
                       onPointerDown={pointerDown}
@@ -316,7 +316,7 @@ const Canva = () => {
                         width: "5px",
                         cursor: "e-resize",
                         backgroundColor: "black",
-                        position: "absolute"
+                        position: "absolute",
                       }}
                       data-shape={"left"}
                       onPointerDown={pointerDown}
@@ -331,7 +331,7 @@ const Canva = () => {
                         width: "5px",
                         cursor: "w-resize",
                         backgroundColor: "black",
-                        position: "absolute"
+                        position: "absolute",
                       }}
                       data-shape={"right"}
                       onPointerMove={(e) => pointerMove(e, item)}
@@ -346,7 +346,7 @@ const Canva = () => {
                         height: "5px",
                         cursor: "s-resize",
                         backgroundColor: "black",
-                        position: "absolute"
+                        position: "absolute",
                       }}
                       data-shape={"bottom"}
                       onPointerDown={pointerDown}
@@ -378,7 +378,7 @@ const Canva = () => {
                         marginLeft: "5px",
                         marginTop: "0px",
                         overflow: "hidden",
-                        resize: "none"
+                        resize: "none",
                       }}
                       onClick={() => {
                         selected(item);
@@ -491,7 +491,7 @@ const Canva = () => {
                     startPoint={item.featureAPosition}
                     endPoint={item.featureBPosition}
                     config={{
-                      strokeWidth: 2
+                      strokeWidth: 2,
                     }}
                     UUID={item.UUID}
                     Selected={item.Selected}
